@@ -1,7 +1,7 @@
 from Jobs import Jobs
-from TextExtractor import TextExtractor
+from tika import Tika
 
 jobs = Jobs()
-text_extractor = TextExtractor()
+text_extractor = Tika()
 for job in jobs.iterate():
-    print(text_extractor.extract_text(job))
+    print(text_extractor.get_file_content(job))
