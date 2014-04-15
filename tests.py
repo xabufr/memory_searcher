@@ -1,8 +1,8 @@
-from Jobs import Jobs
+from jobs import Jobs
 import unittest
 
 
-class tests(unittest.TestCase):
+class Tests(unittest.TestCase):
     def setUp(self):
         self.jobs = Jobs()
         self.jobs.clear()

@@ -1,4 +1,4 @@
-from Jobs import Jobs
+from jobs import Jobs
 from tika import Tika
 
 jobs = Jobs()

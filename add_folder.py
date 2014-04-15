@@ -1,6 +1,6 @@
 import sys
 import os
-from Jobs import Jobs
+from jobs import Jobs
 
 folders = sys.argv[1:]
 jobs = Jobs()
