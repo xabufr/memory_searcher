@@ -1,5 +1,6 @@
-from jobs import Jobs
 import unittest
+
+from logic.jobs import Jobs
 
 
 class Tests(unittest.TestCase):

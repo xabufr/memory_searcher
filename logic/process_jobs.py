@@ -1,6 +1,8 @@
-from jobs import Jobs
-from tika import Tika
 from elasticsearch import Elasticsearch
+
+from jobs import Jobs
+from logic.tika import Tika
+
 
 jobs = Jobs()
 text_extractor = Tika()
