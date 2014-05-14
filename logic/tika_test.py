@@ -1,5 +1,7 @@
 import sys
-from tika import Tika
+
+from logic.tika import Tika
+
 
 files = sys.argv[1:]
 
