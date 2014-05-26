@@ -15,6 +15,8 @@ class MemorySearcher:
         pass
 
     def index(self, content, metadata):
+        self.__es.index(index="memory", doc_type="pdf",
+                 body={"content": content, "metadata": metadata})
         pass
 
     def __set_mapping(self):
