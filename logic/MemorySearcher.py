@@ -39,6 +39,38 @@ class MemorySearcher:
     def index(self, content, metadata):
         self.__es.create(self.__index, self.__type, {'content': content, 'metadata': metadata})
 
+    @staticmethod
+    def pretify(data):
+        out = []
+        for result in data['hits']['hits']:
+            fields = None
+            if 'fields' in result:
+                fields = MemorySearcher.pretify_field(result['fields'])
+            elif '_source' in result:
+                fields = result['_source']
+            else:
+                fields = {}
+            fields['id'] = result['_id']
+            out.append(fields)
+        return out
+
+    @staticmethod
+    def pretify_field(fields):
+        out = {}
+        masters = {}
+        for field in fields:
+            if '.' in field:
+                master_key_end = field.find('.')
+                master_key = field[0:master_key_end]
+                if master_key not in masters:
+                    masters[master_key] = {}
+                masters[master_key][field[master_key_end+1:]] = fields[field]
+            else:
+                out[field] = fields[field]
+        for master in masters:
+            out[master] = MemorySearcher.pretify_field(masters[master])
+        return out
+
     def __set_mapping(self):
         pass
 
@@ -46,4 +78,5 @@ class MemorySearcher:
 if __name__ == "__main__":
     searcher = MemorySearcher()
     #print(searcher.search_on_fields({'metadata.Content-Length': 434010, 'creator': 'Campagne'}))
-    print(searcher.search_globally('Campagne', ['metadata.title']))
+    print(MemorySearcher.pretify(searcher.search_globally('Campagne', ['metadata.title'])))
+    print(MemorySearcher.pretify(searcher.search_globally('Campagne')))
