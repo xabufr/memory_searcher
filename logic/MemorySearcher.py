@@ -7,10 +7,10 @@ class MemorySearcher:
         self.__index = index
         self.__type = "pdf"
 
-    def global_search(self, query):
+    def __search(self, query):
         return self.__es.search(index=self.__index, doc_type=self.__type, body=query)
 
-    def search_globally(self, sentences):
+    def search_globally(self, sentences, result_fields=None):
         query = {
             'query': {
                 'query_string': {
@@ -18,7 +18,9 @@ class MemorySearcher:
                 }
             }
         }
-        return self.global_search(query)
+        if result_fields:
+            query['fields'] = result_fields
+        return self.__search(query)
 
     def search_on_fields(self, terms):
         match = []
@@ -29,8 +31,7 @@ class MemorySearcher:
                     arg: terms[arg]
                 }
             })
-
-        return self.global_search(query)
+        return self.__search(query)
 
     def suggest_search(self, query):
         pass
@@ -45,4 +46,4 @@ class MemorySearcher:
 if __name__ == "__main__":
     searcher = MemorySearcher()
     #print(searcher.search_on_fields({'metadata.Content-Length': 434010, 'creator': 'Campagne'}))
-    print(searcher.search_globally('Campagne'))
+    print(searcher.search_globally('Campagne', ['metadata.title']))
