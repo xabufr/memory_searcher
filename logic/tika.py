@@ -29,6 +29,7 @@ class Tika:
         """
         metadata = self.__call_tika(file_path, ['-m'])
         metadata = self.__patch_metadata_string(metadata)
+        metadata = self.__cast_metadata(metadata)
         return metadata
 
     def __call_tika(self, file_path, options):
@@ -47,3 +48,12 @@ class Tika:
             entry = re.findall('(\S*): (.*)', line)[0]
             metadata_array[entry[0]] = entry[1]
         return metadata_array
+
+    def __cast_metadata(self, metadata):
+        metadata_result = metadata
+        for index in iter(metadata):
+            current_value = metadata[index]
+            if current_value is not '' and re.search('^[0-9]*$', current_value):
+                metadata_result[index] = int(current_value)
+        return metadata_result
+
