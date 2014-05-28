@@ -51,6 +51,7 @@ class MemorySearcher:
             else:
                 fields = {}
             fields['id'] = result['_id']
+            fields['score'] = result['_score']
             out.append(fields)
         return out
 
@@ -78,5 +79,5 @@ class MemorySearcher:
 if __name__ == "__main__":
     searcher = MemorySearcher()
     #print(searcher.search_on_fields({'metadata.Content-Length': 434010, 'creator': 'Campagne'}))
-    print(MemorySearcher.pretify(searcher.search_globally('Campagne', ['metadata.title'])))
+    print(MemorySearcher.pretify(searcher.search_globally('Campagne', ['metadata.title', 'metadata.author'])))
     print(MemorySearcher.pretify(searcher.search_globally('Campagne')))
