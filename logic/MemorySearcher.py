@@ -30,7 +30,6 @@ class MemorySearcher:
                 }
             })
 
-        print(query)
         return self.global_search(query)
 
     def suggest_search(self, query):
@@ -46,4 +45,4 @@ class MemorySearcher:
 if __name__ == "__main__":
     searcher = MemorySearcher()
     #print(searcher.search_on_fields({'metadata.Content-Length': 434010, 'creator': 'Campagne'}))
-    print(searcher.search_globally('jHQpTByFcwjFOE1Kf"Q'))
+    print(searcher.search_globally('Campagne'))
