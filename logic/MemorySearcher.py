@@ -10,8 +10,10 @@ class MemorySearcher:
     def __search(self, query):
         return self.__es.search(index=self.__index, doc_type=self.__type, body=query)
 
-    def search_globally(self, sentences, result_fields=None):
+    def search_globally(self, sentences, result_fields=None, *, page_size=10, page_start=0):
         query = {
+            'from': page_start,
+            'size': page_size,
             'query': {
                 'query_string': {
                     'query': '_all:"' + sentences.replace('"', '\\"') + '"'
@@ -65,7 +67,7 @@ class MemorySearcher:
                 master_key = field[0:master_key_end]
                 if master_key not in masters:
                     masters[master_key] = {}
-                masters[master_key][field[master_key_end+1:]] = fields[field]
+                masters[master_key][field[master_key_end + 1:]] = fields[field]
             else:
                 out[field] = fields[field]
         for master in masters:
@@ -79,5 +81,7 @@ class MemorySearcher:
 if __name__ == "__main__":
     searcher = MemorySearcher()
     #print(searcher.search_on_fields({'metadata.Content-Length': 434010, 'creator': 'Campagne'}))
-    print(MemorySearcher.pretify(searcher.search_globally('Campagne', ['metadata.title', 'metadata.author'])))
-    print(MemorySearcher.pretify(searcher.search_globally('Campagne')))
+    print(MemorySearcher.pretify(
+        searcher.search_globally('Campagne', ['metadata.title', 'metadata.author'], page_size=1)))
+    print(MemorySearcher.pretify(
+        searcher.search_globally('Campagne', ['metadata.title', 'metadata.author'], page_start=1, page_size=1)))
