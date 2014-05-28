@@ -30,6 +30,7 @@ class Tika:
         metadata = self.__call_tika(file_path, ['-m'])
         metadata = self.__patch_metadata_string(metadata)
         metadata = self.__cast_metadata(metadata)
+        metadata = self.__uniformization_metadata(metadata)
         return metadata
 
     def __call_tika(self, file_path, options):
@@ -57,3 +58,23 @@ class Tika:
                 metadata_result[index] = int(current_value)
         return metadata_result
 
+    def __uniformization_metadata(self, metadata):
+        filter = {
+            'fileName': ['ressourceName'],
+            'title': ['title', 'dc:title'],
+            'author': ['Author', 'creator', 'dc:creator', 'meta-author'],
+            'date': ['Last-Save-Date', 'Creation-Date',
+                     'meta:save-date', 'date', 'Last-Modified',
+                     'dcterms:created', 'dcterms:modified', 'meta:creation-date',
+                     'meta:save-date', 'modified'],
+            'content-length': ['Content-Length'],
+            'pages': ['xmpTPg:NPages']
+        }
+        metadata_result = {}
+
+        for field in filter.keys():
+            for source in filter[field]:
+                if source in metadata.keys():
+                    metadata_result[field] = metadata[source]
+
+        return metadata_result
