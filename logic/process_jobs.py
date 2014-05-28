@@ -1,7 +1,7 @@
 from elasticsearch import Elasticsearch
 
 from jobs import Jobs
-from logic.tika import Tika
+from tika import Tika
 
 
 jobs = Jobs()
