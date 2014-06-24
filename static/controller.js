@@ -24,6 +24,7 @@ memorySearch.controller("ViewMemoryCtrl", ['$scope', '$routeParams', 'Memory', f
 	$scope.result = {};
 
 	Memory.get({id: $routeParams.id}, function(data){
-		$scope.result = data;
+		$scope.result = data.metadata;
+		$scope.result.content = data.content;
 	});
 }]);
