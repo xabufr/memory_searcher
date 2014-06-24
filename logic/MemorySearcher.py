@@ -10,6 +10,9 @@ class MemorySearcher:
     def __search(self, query):
         return self.__es.search(index=self.__index, doc_type=self.__type, body=query)
 
+    def get(self, identifier):
+        return self.__es.get(self.__index, identifier)
+
     def search_globally(self, sentences, result_fields=None, *, page_size=10, page_start=0):
         query = {
             'from': page_start,
@@ -81,6 +84,7 @@ class MemorySearcher:
 if __name__ == "__main__":
     searcher = MemorySearcher()
     #print(searcher.search_on_fields({'metadata.Content-Length': 434010, 'creator': 'Campagne'}))
+    print(searcher.get("QJ7atTH7TtCI_HYxWfFs1w"))
     print(MemorySearcher.pretify(
         searcher.search_globally('Campagne', ['metadata.title', 'metadata.author'], page_size=1)))
     print(MemorySearcher.pretify(
