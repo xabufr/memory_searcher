@@ -28,10 +28,14 @@ class MemorySearcher:
         return self.__search(query)
 
     def search_on_fields(self, terms):
-        match = []
-        query = {'query': match}
+        should = []
+        query = {'query': {
+            'bool': {
+                'should': should
+            }
+        }}
         for arg in terms.keys():
-            match.append({
+            should.append({
                 'term': {
                     arg: terms[arg]
                 }
@@ -89,3 +93,4 @@ if __name__ == "__main__":
         searcher.search_globally('Campagne', ['metadata.title', 'metadata.author'], page_size=1)))
     print(MemorySearcher.pretify(
         searcher.search_globally('Campagne', ['metadata.title', 'metadata.author'], page_start=1, page_size=1)))
+    print(searcher.search_on_fields({'metadata.title': 'cluster'}))
