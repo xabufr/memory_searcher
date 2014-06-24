@@ -8,6 +8,22 @@
                     <button class="btn btn-default " ng-click="retriveMemory()"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
             </div>
+	    <span style="color: blue">Advenced</span>
+	    <div> 
+            	<div class="input-group">
+                	<span class="input-group-addon">Title</span>
+			<input ng-model="researchedValues['metadata.title']" type="text" class="form-control" placeholder="Enter your search here"/>
+		</div>
+            	<div class="input-group">
+                	<span class="input-group-addon">Author</span>
+	                <input ng-model="researchedValues['metadata.author']" type="text" class="form-control" placeholder="Enter your search here"/>
+		</div>
+            	<div class="input-group">
+                	<span class="input-group-addon">Content</span>
+	                <input ng-model="researchedValues['metadata.content']" type="text" class="form-control" placeholder="Enter your search here"/>
+		</div>
+                <button class="btn btn-default " ng-click="retriveMemoryFromFields()"><span class="glyphicon glyphicon-search"></span></button>
+	    </div>
         </div>
     </div>
     <div class="panel-body">

@@ -11,13 +11,15 @@ def index():
 @app.route('/memory', methods=['POST'])
 def memory():
     data = request.json
-    query = ['metadata.'+key for key in data.keys()]
-    result = searcher.search_globally(data['title'], query)
+
+    if 'search' in data:
+        result = searcher.search_globally(data['search'], ['metadata.title', 'metadata.author', 'metadata.date'])
+    else:
+        result = searcher.search_on_fields(data);
     return app.make_response(json.dumps(MemorySearcher.pretify(result)))
 
 @app.route('/memory/<id>')
 def memoryFromId(id):
-    print(id)
     result = searcher.get(id)
     return app.make_response(json.dumps(result['_source']))
 

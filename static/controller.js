@@ -1,15 +1,35 @@
 memorySearch.controller("SearchCtrl", ['$scope', '$location','Memory', function($scope, $location, Memory){
     	$scope.results = [];
+	$scope.advenced = false;
 	$scope.researchedValue = "";
+	$scope.researchedValues = {
+		'metadata.title': "",
+		'metadata.author': "",
+		'metadata.content': ""
+	};
 
 	$scope.retriveMemory = function(){
 		var value = $scope.researchedValue;
-		Memory.search({title: value, author: value}, function(data){
+		Memory.search({search: value}, function(data){
 			$scope.results = [];
 			for (var i in data)
 			{
 				var result = data[i].metadata;
 				result.id = data[i].id;
+				result.year = (new Date(data[i].metadata.date)).getFullYear();
+				$scope.results.push(result);
+			}
+		});
+	};
+
+	$scope.retriveMemoryFromFields = function(){
+		Memory.search($scope.researchedValues, function(data){
+			$scope.results = [];
+			for (var i in data)
+			{
+				var result = data[i].metadata;
+				result.id = data[i].id;
+				result.year = (new Date(data[i].metadata.date)).getFullYear();
 				$scope.results.push(result);
 			}
 		});
