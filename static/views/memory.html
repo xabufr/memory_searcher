@@ -1,0 +1,8 @@
+<div class="panel panel-default">
+    <div class="panel-heading">{{ result.title }}</div>
+    <div class="panel-body">
+        <p class="text-center" ng-hide="result.content.length != 0">No Content</p>
+	<p class="text-center" ng-show="result.content.length != 0">{{ result.content }}</p>
+    <div>
+    <div class="panel-footer">{{ result.author }}</div>
+</div>
