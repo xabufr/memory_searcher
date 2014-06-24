@@ -22,4 +22,4 @@ def memoryFromId(id):
     return app.make_response(json.dumps(result['_source']))
 
 if __name__ == '__main__':
-    app.run()
+    app.run("0.0.0.0")
