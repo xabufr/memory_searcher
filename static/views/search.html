@@ -17,12 +17,14 @@
                 <th>Title</th>
                 <th>Author</th>
                 <th>Year</th>
+		<th></th>
             </thead>
             <tbody>
                 <tr ng-repeat="result in results">
                     <td>{{ result.title }}</td>
                     <td>{{ result.author }}</td>
                     <td>{{ result.year }}</td>
+		    <td><button class="btn btn-default" ng-click="retriveMemoryWithId(result.id);"><span class="glyphicon glyphicon-eye-open" ></span></button></td>
                 </tr>
             </tbody>
         </table>

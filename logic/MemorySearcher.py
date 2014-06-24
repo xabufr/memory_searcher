@@ -67,7 +67,7 @@ class MemorySearcher:
                 master_key = field[0:master_key_end]
                 if master_key not in masters:
                     masters[master_key] = {}
-                masters[master_key][field[master_key_end + 1:]] = fields[field]
+                masters[master_key][field[master_key_end + 1:]] = fields[field][0]
             else:
                 out[field] = fields[field]
         for master in masters:

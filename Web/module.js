@@ -1,1 +1,0 @@
-var memorySearch = angular.module("MemorySearch", ['ngRoute'])
