@@ -5,11 +5,11 @@
                 <span class="input-group-addon">Search</span>
                 <input ng-model="researchedValue" type="text" class="form-control" placeholder="Enter your search here"/>
                 <span class="input-group-btn">
-                    <button class="btn btn-default " ng-click="retriveMemory()"><span class="glyphicon glyphicon-search"></span></button>
+                    <button class="btn btn-default " ng-click="retrieveMemory()"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
             </div>
-	    <a ng-click="advencedSearchVisibility()" style="padding-left: 1%">Advenced</a>
-	    <div ng-show="advencedSearchVisible"> 
+	    <a ng-click="advancedSearchVisibility()" style="padding-left: 1%">Advanced</a>
+	    <div ng-show="advancedSearchVisible"> 
             	<div class="input-group col-md-3" style="padding-left: 1%">
                 	<span class="input-group-addon" style="width:30%">Title</span>
 			<input ng-model="researchedValues['metadata.title']" type="text" class="form-control" placeholder="Enter your search here"/>
@@ -22,7 +22,7 @@
                 	<span class="input-group-addon" style="width:30%">Content</span>
 	                <input ng-model="researchedValues['metadata.content']" type="text" class="form-control" placeholder="Enter your search here"/>
 		</div>
-                <button class="btn btn-default " ng-click="retriveMemoryFromFields()" style="padding-left: 1%">Advenced Search</button>
+                <button class="btn btn-default " ng-click="retrieveMemoryFromFields()" style="padding-left: 1%">Advanced Search</button>
 	    </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
                     <td>{{ result.title }}</td>
                     <td>{{ result.author }}</td>
                     <td>{{ result.year }}</td>
-		    <td><button class="btn btn-default" ng-click="retriveMemoryWithId(result.id);"><span class="glyphicon glyphicon-eye-open" ></span></button></td>
+		    <td><button class="btn btn-default" ng-click="retrieveMemoryWithId(result.id);"><span class="glyphicon glyphicon-eye-open" ></span></button></td>
                 </tr>
             </tbody>
         </table>

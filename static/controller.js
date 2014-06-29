@@ -1,6 +1,6 @@
 memorySearch.controller("SearchCtrl", ['$scope', '$location','Memory', function($scope, $location, Memory){
     	$scope.results = [];
-	$scope.advencedSearchVisible = false;
+	$scope.advancedSearchVisible = false;
 	$scope.researchedValue = "";
 	$scope.researchedValues = {
 		'metadata.title': "",
@@ -8,38 +8,42 @@ memorySearch.controller("SearchCtrl", ['$scope', '$location','Memory', function(
 		'metadata.content': ""
 	};
 
-	$scope.advencedSearchVisibility = function(){
-		$scope.advencedSearchVisible = !$scope.advencedSearchVisible;
-	}
+	$scope.advancedSearchVisibility = function(){
+		$scope.advancedSearchVisible = !$scope.advancedSearchVisible;
+	};
 
-	$scope.retriveMemory = function(){
+	$scope.retrieveMemory = function(){
 		var value = $scope.researchedValue;
 		Memory.search({search: value}, function(data){
 			$scope.results = [];
 			for (var i in data)
 			{
-				var result = data[i].metadata;
-				result.id = data[i].id;
-				result.year = (new Date(data[i].metadata.date)).getFullYear();
-				$scope.results.push(result);
+				if(!isNaN(i)) {
+                    var result = data[i].metadata;
+                    result.id = data[i].id;
+                    result.year = (new Date(data[i].metadata.date)).getFullYear();
+                    $scope.results.push(result);
+                }
 			}
 		});
 	};
 
-	$scope.retriveMemoryFromFields = function(){
+	$scope.retrieveMemoryFromFields = function(){
 		Memory.search($scope.researchedValues, function(data){
 			$scope.results = [];
 			for (var i in data)
 			{
-				var result = data[i].metadata;
-				result.id = data[i].id;
-				result.year = (new Date(data[i].metadata.date)).getFullYear();
-				$scope.results.push(result);
+				if(!isNaN(i)) {
+                    var result = data[i].metadata;
+                    result.id = data[i].id;
+                    result.year = (new Date(data[i].metadata.date)).getFullYear();
+                    $scope.results.push(result);
+                }
 			}
 		});
 	};
 
-	$scope.retriveMemoryWithId = function(id){
+	$scope.retrieveMemoryWithId = function(id){
 		$location.path("/"+id);
 	};
 }]);
