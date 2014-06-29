@@ -7,6 +7,6 @@ memorySearch.config(['$routeProvider', function($routeProvider){
 	templateUrl: "views/memory.html",
     	controller: "ViewMemoryCtrl"
     })
-    .otherwise({rediretTo:"/"});
+    .otherwise({redirectTo:"/"});
 
 }]);
