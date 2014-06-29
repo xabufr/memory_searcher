@@ -1,12 +1,16 @@
 memorySearch.controller("SearchCtrl", ['$scope', '$location','Memory', function($scope, $location, Memory){
     	$scope.results = [];
-	$scope.advenced = false;
+	$scope.advencedSearchVisible = false;
 	$scope.researchedValue = "";
 	$scope.researchedValues = {
 		'metadata.title': "",
 		'metadata.author': "",
 		'metadata.content': ""
 	};
+
+	$scope.advencedSearchVisibility = function(){
+		$scope.advencedSearchVisible = !$scope.advencedSearchVisible;
+	}
 
 	$scope.retriveMemory = function(){
 		var value = $scope.researchedValue;

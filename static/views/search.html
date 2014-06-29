@@ -1,28 +1,28 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="row">
-            <div class="input-group col-md-4 col-md-offset-8">
+            <div class="input-group col-md-3" style="padding-left: 1%">
                 <span class="input-group-addon">Search</span>
                 <input ng-model="researchedValue" type="text" class="form-control" placeholder="Enter your search here"/>
                 <span class="input-group-btn">
                     <button class="btn btn-default " ng-click="retriveMemory()"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
             </div>
-	    <span style="color: blue">Advenced</span>
-	    <div> 
-            	<div class="input-group">
-                	<span class="input-group-addon">Title</span>
+	    <a ng-click="advencedSearchVisibility()" style="padding-left: 1%">Advenced</a>
+	    <div ng-show="advencedSearchVisible"> 
+            	<div class="input-group col-md-3" style="padding-left: 1%">
+                	<span class="input-group-addon" style="width:30%">Title</span>
 			<input ng-model="researchedValues['metadata.title']" type="text" class="form-control" placeholder="Enter your search here"/>
 		</div>
-            	<div class="input-group">
-                	<span class="input-group-addon">Author</span>
+            	<div class="input-group col-md-3" style="padding-left: 1%">
+                	<span class="input-group-addon" style="width:30%">Author</span>
 	                <input ng-model="researchedValues['metadata.author']" type="text" class="form-control" placeholder="Enter your search here"/>
 		</div>
-            	<div class="input-group">
-                	<span class="input-group-addon">Content</span>
+            	<div class="input-group col-md-3" style="padding-left: 1%">
+                	<span class="input-group-addon" style="width:30%">Content</span>
 	                <input ng-model="researchedValues['metadata.content']" type="text" class="form-control" placeholder="Enter your search here"/>
 		</div>
-                <button class="btn btn-default " ng-click="retriveMemoryFromFields()"><span class="glyphicon glyphicon-search"></span></button>
+                <button class="btn btn-default " ng-click="retriveMemoryFromFields()" style="padding-left: 1%">Advenced Search</button>
 	    </div>
         </div>
     </div>
